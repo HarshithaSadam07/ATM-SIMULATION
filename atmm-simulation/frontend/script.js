@@ -34,6 +34,10 @@ function showTransactions() {
     fetchTransactions();
 }
 
+function showTransfer() {
+    showScreen('transferScreen');
+}
+
 // API Functions
 async function login(event) {
     event.preventDefault();
@@ -134,15 +138,49 @@ async function fetchTransactions() {
 
         const transactionsList = document.getElementById('transactionsList');
         transactionsList.innerHTML = data.transactions
-            .map(transaction => `
-                <div class="transaction-item">
-                    <span>${new Date(transaction.date).toLocaleString()}</span>
-                    <span class="amount ${transaction.type}">
-                        ${transaction.type === 'deposit' ? '+' : '-'}₹${transaction.amount.toFixed(2)}
-                    </span>
-                </div>
-            `)
+            .map(t => {
+                let sign = '';
+                let label = '';
+                if (t.type === 'deposit') { sign = '+'; label = 'Deposit'; }
+                else if (t.type === 'withdraw') { sign = '-'; label = 'Withdraw'; }
+                else if (t.type === 'transfer') {
+                    label = t.fromCardNumber ? `Received from ${t.fromCardNumber}` : `Sent to ${t.toCardNumber}`;
+                    sign = t.fromCardNumber ? '+' : '-';
+                }
+                return `
+                    <div class="transaction-item">
+                        <span>${new Date(t.date).toLocaleString()} — ${label}</span>
+                        <span class="amount ${t.type}">${sign}₹${Number(t.amount).toFixed(2)}</span>
+                    </div>
+                `;
+            })
             .join('');
+    } catch (error) {
+        showNotification(error.message, true);
+    }
+}
+
+async function transfer(event) {
+    event.preventDefault();
+    const toCardNumber = document.getElementById('toCardNumber').value.trim();
+    const amount = parseFloat(document.getElementById('transferAmount').value);
+
+    try {
+        const response = await fetch(`${API_URL}/account/transfer`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ toCardNumber, amount })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Transfer failed');
+
+        document.getElementById('transferForm').reset();
+        showDashboard();
+        showNotification('Transfer successful');
     } catch (error) {
         showNotification(error.message, true);
     }
@@ -159,3 +197,4 @@ function logout() {
 document.getElementById('loginForm').addEventListener('submit', login);
 document.getElementById('withdrawForm').addEventListener('submit', withdraw);
 document.getElementById('depositForm').addEventListener('submit', deposit);
+document.getElementById('transferForm').addEventListener('submit', transfer);

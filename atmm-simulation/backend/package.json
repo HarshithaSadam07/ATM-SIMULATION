@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start:insecure": "set MONGO_TLS_INSECURE=1&& node server.js",
+    "seed": "node seed-users.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

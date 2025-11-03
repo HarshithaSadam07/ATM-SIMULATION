@@ -28,6 +28,7 @@
             <div class="actions">
                 <button onclick="showWithdraw()">Withdraw</button>
                 <button onclick="showDeposit()">Deposit</button>
+                <button onclick="showTransfer()">Transfer</button>
                 <button onclick="showTransactions()">Transactions</button>
                 <button onclick="logout()" class="logout-btn">Logout</button>
             </div>
@@ -49,6 +50,17 @@
             <form id="depositForm">
                 <input type="number" id="depositAmount" placeholder="Enter amount" required>
                 <button type="submit">Deposit</button>
+                <button type="button" onclick="showDashboard()">Back</button>
+            </form>
+        </div>
+
+        <!-- Transfer Screen -->
+        <div id="transferScreen" class="screen hidden">
+            <h2>Transfer Money</h2>
+            <form id="transferForm">
+                <input type="text" id="toCardNumber" placeholder="To Card Number" required>
+                <input type="number" id="transferAmount" placeholder="Enter amount" required>
+                <button type="submit">Transfer</button>
                 <button type="button" onclick="showDashboard()">Back</button>
             </form>
         </div>

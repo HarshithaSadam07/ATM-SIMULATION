@@ -18,7 +18,15 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+const mongoOptions = {};
+if (process.env.MONGO_TLS_INSECURE === '1') {
+    mongoOptions.ssl = true;
+    mongoOptions.sslValidate = false;
+    mongoOptions.tlsAllowInvalidCertificates = true;
+    mongoOptions.tlsAllowInvalidHostnames = true;
+}
+
+mongoose.connect(process.env.MONGODB_URI, mongoOptions)
     .then(() => {
         console.log('Connected to MongoDB');
     })
