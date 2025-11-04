@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://atm-simulation.onrender.com/api';
 
 function Login({ onLogin }) {
   const [cardNumber, setCardNumber] = useState('');
