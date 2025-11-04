@@ -6,7 +6,6 @@ import {
   VStack,
   Heading,
   Text,
-  useToast,
   HStack,
   Divider,
   Table,
@@ -26,16 +25,28 @@ import {
   Input,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react'; // ✅ fixed separate import
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api';
+// 🔹 Change API URL to your deployed backend (not localhost)
+const API_URL = 'https://atm-simulation.onrender.com/api';
 
 function Dashboard({ token, onLogout }) {
   const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [amount, setAmount] = useState('');
-  const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
-  const { isOpen: isWithdrawOpen, onOpen: onWithdrawOpen, onClose: onWithdrawClose } = useDisclosure();
+
+  const {
+    isOpen: isDepositOpen,
+    onOpen: onDepositOpen,
+    onClose: onDepositClose,
+  } = useDisclosure();
+  const {
+    isOpen: isWithdrawOpen,
+    onOpen: onWithdrawOpen,
+    onClose: onWithdrawClose,
+  } = useDisclosure();
+
   const toast = useToast();
 
   const fetchBalance = async () => {
@@ -48,7 +59,8 @@ function Dashboard({ token, onLogout }) {
       console.error('Failed to fetch balance:', error);
       toast({
         title: 'Error',
-        description: error.response?.data?.message || 'Failed to fetch balance',
+        description:
+          error.response?.data?.message || 'Failed to fetch balance',
         status: 'error',
         duration: 3000,
       });
@@ -65,7 +77,8 @@ function Dashboard({ token, onLogout }) {
       console.error('Failed to fetch transactions:', error);
       toast({
         title: 'Error',
-        description: error.response?.data?.message || 'Failed to fetch transactions',
+        description:
+          error.response?.data?.message || 'Failed to fetch transactions',
         status: 'error',
         duration: 3000,
       });
@@ -178,8 +191,14 @@ function Dashboard({ token, onLogout }) {
                 <Tr key={transaction._id}>
                   <Td>{new Date(transaction.date).toLocaleString()}</Td>
                   <Td textTransform="capitalize">{transaction.type}</Td>
-                  <Td isNumeric color={transaction.type === 'deposit' ? 'green.500' : 'red.500'}>
-                    {transaction.type === 'deposit' ? '+' : '-'}₹{transaction.amount.toFixed(2)}
+                  <Td
+                    isNumeric
+                    color={
+                      transaction.type === 'deposit' ? 'green.500' : 'red.500'
+                    }
+                  >
+                    {transaction.type === 'deposit' ? '+' : '-'}₹
+                    {transaction.amount.toFixed(2)}
                   </Td>
                 </Tr>
               ))}
@@ -204,7 +223,12 @@ function Dashboard({ token, onLogout }) {
                 placeholder="Enter amount"
               />
             </FormControl>
-            <Button mt={4} colorScheme="green" onClick={handleDeposit} width="full">
+            <Button
+              mt={4}
+              colorScheme="green"
+              onClick={handleDeposit}
+              width="full"
+            >
               Deposit
             </Button>
           </ModalBody>
@@ -227,7 +251,12 @@ function Dashboard({ token, onLogout }) {
                 placeholder="Enter amount"
               />
             </FormControl>
-            <Button mt={4} colorScheme="blue" onClick={handleWithdraw} width="full">
+            <Button
+              mt={4}
+              colorScheme="blue"
+              onClick={handleWithdraw}
+              width="full"
+            >
               Withdraw
             </Button>
           </ModalBody>
