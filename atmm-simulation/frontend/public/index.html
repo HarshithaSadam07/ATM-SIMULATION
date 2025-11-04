@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Simulation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body style="--app-bg-image: url('https://www.247merchantservice.com/wp-content/uploads/2014/05/atm2.png')">
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="screen">
+            <h2>Welcome to ATM</h2>
+            <form id="loginForm">
+                <input type="text" id="cardNumber" placeholder="Card Number" required>
+                <input type="password" id="pin" placeholder="PIN" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div id="dashboardScreen" class="screen hidden">
+            <h2>Welcome, <span id="userName"></span></h2>
+            <div class="balance-box">
+                <h3>Current Balance</h3>
+                <p id="balance">₹0.00</p>
+            </div>
+            <div class="actions">
+                <button onclick="showWithdraw()">Withdraw</button>
+                <button onclick="showDeposit()">Deposit</button>
+                <button onclick="showTransfer()">Transfer</button>
+                <button onclick="showTransactions()">Transactions</button>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <!-- Withdraw Screen -->
+        <div id="withdrawScreen" class="screen hidden">
+            <h2>Withdraw Money</h2>
+            <form id="withdrawForm">
+                <input type="number" id="withdrawAmount" placeholder="Enter amount" required>
+                <button type="submit">Withdraw</button>
+                <button type="button" onclick="showDashboard()">Back</button>
+            </form>
+        </div>
+
+        <!-- Deposit Screen -->
+        <div id="depositScreen" class="screen hidden">
+            <h2>Deposit Money</h2>
+            <form id="depositForm">
+                <input type="number" id="depositAmount" placeholder="Enter amount" required>
+                <button type="submit">Deposit</button>
+                <button type="button" onclick="showDashboard()">Back</button>
+            </form>
+        </div>
+
+        <!-- Transfer Screen -->
+        <div id="transferScreen" class="screen hidden">
+            <h2>Transfer Money</h2>
+            <form id="transferForm">
+                <input type="text" id="toCardNumber" placeholder="To Card Number" required>
+                <input type="number" id="transferAmount" placeholder="Enter amount" required>
+                <button type="submit">Transfer</button>
+                <button type="button" onclick="showDashboard()">Back</button>
+            </form>
+        </div>
+
+        <!-- Transactions Screen -->
+        <div id="transactionsScreen" class="screen hidden">
+            <h2>Transaction History</h2>
+            <div id="transactionsList"></div>
+            <button onclick="showDashboard()">Back</button>
+        </div>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+    <script src="script.js?v=2"></script>
+</body>
+</html>
