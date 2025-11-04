@@ -1,8 +1,8 @@
 {
   "name": "atm-simulation-frontend",
   "version": "1.0.0",
+  "description": "Static frontend for ATM simulation",
   "private": true,
-  "description": "Frontend for ATM Simulation Project",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -10,14 +10,19 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@chakra-ui/react": "^3.1.1",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "framer-motion": "^10.16.3",
-    "axios": "^1.6.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.3",
+    "framer-motion": "^10.18.0",
+    "axios": "^1.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "jsdom": "^27.0.1",
+    "node-fetch": "^2.7.0"
   },
   "engines": {
     "node": "22.x",
