@@ -4,15 +4,24 @@
   "description": "Static frontend for ATM simulation",
   "private": true,
   "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-}
-,
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "axios": "^1.6.8"
+  },
   "devDependencies": {
     "http-server": "^14.1.1",
     "jsdom": "^27.0.1",
     "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
   }
 }
