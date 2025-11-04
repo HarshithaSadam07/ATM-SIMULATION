@@ -4,9 +4,12 @@
   "description": "Static frontend for ATM simulation",
   "private": true,
   "scripts": {
-    "start": "http-server -p 8081",
-    "check": "node tools/run_frontend_check.js"
-  },
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+}
+,
   "devDependencies": {
     "http-server": "^14.1.1",
     "jsdom": "^27.0.1",
