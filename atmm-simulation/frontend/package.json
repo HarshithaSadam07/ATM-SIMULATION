@@ -19,6 +19,9 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
   },
+  "resolutions": {
+    "@chakra-ui/react": "^2.8.2"
+  },
   "devDependencies": {
     "http-server": "^14.1.1",
     "jsdom": "^27.0.1",
