@@ -8,8 +8,8 @@ import {
   Input,
   VStack,
   Heading,
-  useToast,
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react'; // ✅ separate import fixes Render issue
 import axios from 'axios';
 
 const API_URL = 'https://atm-simulation.onrender.com/api';
@@ -31,6 +31,7 @@ function Login({ onLogin }) {
         title: 'Login successful',
         status: 'success',
         duration: 3000,
+        isClosable: true,
       });
     } catch (error) {
       toast({
@@ -38,12 +39,21 @@ function Login({ onLogin }) {
         description: error.response?.data?.message || 'Login failed',
         status: 'error',
         duration: 3000,
+        isClosable: true,
       });
     }
   };
 
   return (
-    <Box p={8} maxWidth="500px" mx="auto" mt={20} borderWidth={1} borderRadius={8} boxShadow="lg">
+    <Box
+      p={8}
+      maxWidth="500px"
+      mx="auto"
+      mt={20}
+      borderWidth={1}
+      borderRadius={8}
+      boxShadow="lg"
+    >
       <VStack spacing={4} as="form" onSubmit={handleSubmit}>
         <Heading>Welcome to ATM</Heading>
         <FormControl isRequired>
